@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendar Cita - Inmobiliaria</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #4CAF50;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .confirmation {
+      text-align: center;
+      background-color: #e8f5e9;
+      color: #388e3c;
+      padding: 15px;
+      border: 1px solid #c8e6c9;
+      border-radius: 5px;
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Agendar Cita</h1>
+    <form id="appointmentForm">
+      <label for="appointmentType">Tipo de Cita</label>
+      <select id="appointmentType" required>
+        <option value="">Seleccionar...</option>
+        <option value="Visita a Propiedad">Visita a Propiedad</option>
+        <option value="Asesoría">Asesoría</option>
+      </select>
+
+      <label for="appointmentDate">Fecha</label>
+      <input type="date" id="appointmentDate" required>
+
+      <label for="appointmentTime">Hora</label>
+      <select id="appointmentTime" required>
+        <option value="">Seleccionar...</option>
+        <option value="09:00">09:00 AM</option>
+        <option value="10:00">10:00 AM</option>
+        <option value="11:00">11:00 AM</option>
+        <option value="14:00">02:00 PM</option>
+        <option value="15:00">03:00 PM</option>
+        <option value="16:00">04:00 PM</option>
+      </select>
+
+      <label for="clientName">Nombre</label>
+      <input type="text" id="clientName" placeholder="Tu nombre" required>
+
+      <label for="clientEmail">Correo Electrónico</label>
+      <input type="email" id="clientEmail" placeholder="Tu correo" required>
+
+      <button type="submit">Confirmar Cita</button>
+    </form>
+
+    <div class="confirmation" id="confirmationMessage">
+      ¡Gracias! Tu cita ha sido agendada.
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const type = document.getElementById('appointmentType').value;
+      const date = document.getElementById('appointmentDate').value;
+      const time = document.getElementById('appointmentTime').value;
+      const name = document.getElementById('clientName').value;
+      const email = document.getElementById('clientEmail').value;
+
+      if (type && date && time && name && email) {
+        const confirmationMessage = document.getElementById('confirmationMessage');
+        confirmationMessage.innerHTML = `¡Gracias, ${name}! Tu cita para ${type} el día ${date} a las ${time} ha sido confirmada. Se enviará una confirmación a ${email}.`;
+        confirmationMessage.style.display = 'block';
+
+        // Reset form
+        document.getElementById('appointmentForm').reset();
+      }
+    });
+  </script>
+</body>
+</html>
